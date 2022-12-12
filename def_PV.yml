@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nombrepv
+spec:
+  capacity:
+    storage: XGi
+  accessModes:
+    - MODO_ACCESO
+  persistentVolumeReclaimPolicy: RECLAIM
+  storageClassName: NOMBRE_STORAGECLASS
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: NOMBREPVC
+    namespace: NOMBREPROYECTO
+  nfs:
+    path: /export/dir
+    server: SERVER
+
+--------------------
+donde:
+	MODO_ACCESO: ReadWriteOnce|ReadWriteMany|ReadOnlyMany
+	NOMBRE_STORAGECLASS: nombre de la storageclass a usar
+	XGi: Cantidad de Gbi
+	nombrepv: nombre del PV
+	path: ruta dentro del servidor NFS que se está exportando
+	server: hostname completo del servidor NFS
+	RECLAIM: Deleted|Recycle|Retain
+	SERVER: hostname completo del servidor NFS|IP del servidor NFS
+	NOMBREPVC: nombre del PVC que usará este PV
+	NOMBREPROYECTO: nombre del proyecto donde está el PVC 
